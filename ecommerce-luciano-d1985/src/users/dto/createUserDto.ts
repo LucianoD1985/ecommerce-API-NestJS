@@ -12,7 +12,7 @@ import {
   Validate,
   // ValidatorConstraint,
 } from 'class-validator';
-import { MatchPassword } from 'src/decorators/matchPassword';
+import { MatchPassword } from '../../decorators/matchPassword';
 //import { Orders } from 'src/orders/orders.entity';
 
 export class CreateUserDto {

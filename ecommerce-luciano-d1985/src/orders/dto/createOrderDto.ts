@@ -1,5 +1,5 @@
 import { ArrayMinSize, IsArray, IsNotEmpty, IsUUID } from 'class-validator';
-import { Products } from 'src/products/products.entity';
+import { Products } from '../../products/products.entity';
 
 export class CreateOrderDto {
   @IsNotEmpty({ message: 'El id del usuario es requerido' })

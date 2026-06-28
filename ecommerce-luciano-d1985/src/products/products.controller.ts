@@ -9,10 +9,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { Products } from 'src/products/products.entity';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
-import { Roles } from 'src/decorators/roles.decorator';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Products } from '../products/products.entity';
+import { AuthGuard } from '../auth/guards/auth.guard';
+import { Roles } from '../decorators/roles.decorator';
+import { RolesGuard } from '../auth/guards/roles.guard';
 //import { IProduct } from './products.repository';
 
 @Controller('products')

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { OrderDetails } from 'src/orders/orderdetails.entity';
-import { Orders } from 'src/orders/orders.entity';
-import { Users } from 'src/users/users.entity';
-import { Products } from 'src/products/products.entity';
+import { OrderDetails } from '../orders/orderdetails.entity';
+import { Orders } from '../orders/orders.entity';
+import { Users } from '../users/users.entity';
+import { Products } from '../products/products.entity';
 
 @Injectable()
 export class OrdersRepository {

@@ -12,11 +12,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { AuthGuard } from '../auth/guards/auth.guard';
 import { Users } from '../users/users.entity';
 import { CreateUserDto } from './dto/createUserDto';
-import { Roles } from 'src/decorators/roles.decorator';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from '../decorators/roles.decorator';
+import { RolesGuard } from '../auth/guards/roles.guard';
 
 @Controller('users')
 export class UsersController {
@@ -49,16 +49,6 @@ export class UsersController {
     return this.usersService.getUserById(id);
   }
 
-  // @Post()
-  // @HttpCode(201)
-  //addUser(@Body() newUserData: CreateUserDto) {
-  ////VALIDACIONES => REEMPLAZAR MAS ADELANTE!!!!
-  ////if (!newUserData.email || !newUserData.name || !newUserData.password)
-  ////return 'Faltan datos obligatorios: email, name o password';
-  ////{
-  // return this.usersService.addUser(newUserData);
-  // }
-  //}
   @Put(':id')
   @UseGuards(AuthGuard)
   @HttpCode(200)
