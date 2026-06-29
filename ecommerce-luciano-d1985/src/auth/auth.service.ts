@@ -39,7 +39,7 @@ export class AuthService {
 
   async signIn(email: string, password: string) {
     if (!email || !password) {
-      return 'Faltan datos obligatorios: email o password';
+      throw new BadRequestException('Credenciales incorrectas');
     }
     //verificar que el usuario exista
     const foundUser = await this.usersRepository.getUserByEmail(email);

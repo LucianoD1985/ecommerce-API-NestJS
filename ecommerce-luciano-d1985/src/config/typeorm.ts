@@ -1,6 +1,6 @@
 import { registerAs } from '@nestjs/config';
 import { config as dotenvConfig } from 'dotenv';
-//import { DataSource, DataSourceOptions } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 dotenvConfig({ path: 'env.development' });
 import { environment } from './environment';
 
@@ -22,4 +22,4 @@ const config = {
 //registramos objeto de configuración con el nombre "typeorm":
 export const typeOrmConfig = registerAs('typeorm', () => config);
 //
-//export const connectionSource = new DataSource(config as DataSourceOptions);
+export const connectionSource = new DataSource(config as DataSourceOptions);

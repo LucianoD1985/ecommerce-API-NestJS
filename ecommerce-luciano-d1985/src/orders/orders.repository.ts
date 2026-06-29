@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -54,7 +58,7 @@ export class OrdersRepository {
 
     //asocio cada ID con el producto
     const productsArray = await Promise.all(
-      products.map(async (element) => {
+      products.map(async (element: { id: any }) => {
         const product = await this.ormProductsRepository.findOneBy({
           id: element.id,
         });

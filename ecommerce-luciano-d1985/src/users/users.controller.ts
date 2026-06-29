@@ -6,7 +6,7 @@ import {
   HttpCode,
   Param,
   ParseUUIDPipe,
-  Post,
+  // Post,
   Put,
   Query,
   UseGuards,
@@ -14,7 +14,7 @@ import {
 import { UsersService } from './users.service';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { Users } from '../users/users.entity';
-import { CreateUserDto } from './dto/createUserDto';
+//import { CreateUserDto } from './dto/createUserDto';
 import { Roles } from '../decorators/roles.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
 

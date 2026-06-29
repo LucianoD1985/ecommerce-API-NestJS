@@ -21,11 +21,14 @@ export class RolesGuard implements CanActivate {
     //routesroles: 'admin'
 
     //acceder a roles del request
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const request = context.switchToHttp().getRequest();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     if (!request.user) {
       throw new ForbiddenException('Usuario no autenticado');
     }
     //request:
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     const userRoles = request.user.roles;
 
     //validar

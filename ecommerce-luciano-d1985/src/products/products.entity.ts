@@ -14,7 +14,7 @@ import { OrderDetails } from '../orders/orderdetails.entity';
 })
 export class Products {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column({
     type: 'varchar',
@@ -22,13 +22,13 @@ export class Products {
     unique: true,
     nullable: false,
   })
-  name: string;
+  name!: string;
 
   @Column({
     type: 'text',
     nullable: false,
   })
-  description: string;
+  description!: string;
 
   @Column({
     type: 'decimal',
@@ -36,26 +36,26 @@ export class Products {
     scale: 2,
     nullable: false,
   })
-  price: number;
+  price!: number;
 
   @Column({
     type: 'int',
     nullable: false,
   })
-  stock: number;
+  stock!: number;
 
   @Column({
     type: 'text',
     default:
       'https://www.pexels.com/es-es/foto/firmar-tipografia-hojas-texto-4439444/',
   })
-  imageUrl: string;
+  imageUrl!: string;
 
   @ManyToOne(() => Categories, (categories) => categories.products)
   @JoinColumn({ name: 'categories_id' })
-  category: Categories;
+  category!: Categories;
 
   @ManyToMany(() => OrderDetails, (orderDetails) => orderDetails.products)
-  orderDetails: OrderDetails[];
+  orderDetails!: OrderDetails[];
 }
 export { OrderDetails };
