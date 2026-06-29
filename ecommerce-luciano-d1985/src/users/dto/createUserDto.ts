@@ -1,4 +1,4 @@
-import { ApiHideProperty, PickType } from '@nestjs/swagger';
+import { ApiHideProperty, ApiProperty, PickType } from '@nestjs/swagger';
 import {
   IsEmail,
   IsEmpty,
@@ -14,18 +14,16 @@ import {
 import { MatchPassword } from '../../decorators/matchPassword';
 
 export class CreateUserDto {
-  /**
-   * Debe ser un string de entre 3 y 80 caracteres
-   */
+  @ApiProperty({
+    description: 'debe ser un string de entre 3 y 80 caracteres',
+  })
   @IsNotEmpty({ message: 'El nombre es requerido' })
   @IsString({ message: 'El nombre debe ser una cadena de texto' })
   @MinLength(3, { message: 'El nombre debe tener al menos 3 caracteres' })
   @MaxLength(80, { message: 'El nombre no debe exceder los 80 caracteres' })
   name!: string;
 
-  /**
-   * Debe ser un email válido
-   */
+  @ApiProperty({ description: 'Debe ser email válido' })
   @IsNotEmpty({ message: 'El email es requerido' })
   @IsEmail(
     {},
@@ -33,10 +31,7 @@ export class CreateUserDto {
   )
   email!: string;
 
-  /**
-   * Debe contener al menos una letra mayúscula, una letra minúscula, un número y un símbolo, y tener entre 8 y 15 caracteres
-   */
-
+  @ApiProperty({ description: 'Contraseña del usuario' })
   @IsNotEmpty({ message: 'La contraseña es requerida' })
   @IsString({ message: 'La contraseña debe ser una cadena de texto' })
   @IsStrongPassword(
@@ -55,17 +50,12 @@ export class CreateUserDto {
   @MaxLength(15, { message: 'La contraseña no debe exceder los 15 caracteres' })
   password!: string;
 
-  /**
-   * Debe ser igual al password
-   */
+  @ApiProperty({ description: 'Confirmación de la contraseña' })
   @IsNotEmpty()
   @Validate(MatchPassword, ['password'])
   confirmPassword!: string;
 
-  /**
-   * Debe ser un numero y no puede estar vacío
-   */
-
+  @ApiProperty({ description: 'Debe ser un número y no puede estar vacío' })
   @IsNotEmpty({ message: 'El teléfono es requerido' })
   @IsNumber(
     {
@@ -76,26 +66,18 @@ export class CreateUserDto {
   )
   phone!: number;
 
-  /**
-   * Debe ser un string de entre 5 y 20 caracteres
-   */
-
+  @ApiProperty({ description: 'Debe ser un string de entre 5 y 20 caracteres' })
   @IsString({ message: 'El país debe ser una cadena de texto' })
   @MinLength(5, { message: 'El país debe tener al menos 5 caracteres' })
   @MaxLength(20, { message: 'El país no debe exceder los 20 caracteres' })
   country?: string;
 
-  /**
-   * Debe ser un string de entre 3 y 80 caracteres
-   */
   @IsString({ message: 'La dirección debe ser una cadena de texto' })
   @MinLength(3, { message: 'La dirección debe tener al menos 3 caracteres' })
   @MaxLength(80, { message: 'La dirección no debe exceder los 80 caracteres' })
   address?: string;
 
-  /**
-   * Debe ser un string de entre 5 y 20 caracteres
-   */
+  @ApiProperty({ description: 'Debe ser un string de entre 5 y 20 caracteres' })
   @IsString({ message: 'La ciudad debe ser una cadena de texto' })
   @MinLength(5, { message: 'La ciudad debe tener al menos 5 caracteres' })
   @MaxLength(20, { message: 'La ciudad no debe exceder los 20 caracteres' })
