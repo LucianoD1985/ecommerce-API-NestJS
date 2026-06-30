@@ -46,7 +46,7 @@ export class ProductsRepository {
           .insert()
           .into(Products)
           .values(product)
-          .orUpdate(['description', 'price', 'stock'], ['name']) //'imageUrl' saque ese item porque no lo tengo en la entidad ni en el data.ts
+          .orUpdate(['description', 'price', 'stock'], ['name'])
           .execute();
       }),
     );

@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -41,22 +41,18 @@ export class OrdersRepository {
   }
 
   async addOrder(newOrderData: any): Promise<Orders[] | string> {
-    // desestructuramos los datos de la nueva orden
     const { userId, products } = newOrderData;
 
-    //verificamos que el usuario exista
     const user = await this.ormUsersRepository.findOneBy({ id: userId });
     if (!user) {
       return `Usuario con ID ${userId} no encontrado`;
     }
 
-    //creamos la orden
     const order = new Orders();
     order.date = new Date();
     order.user = user;
     const newOrder = await this.ormOrdersRepository.save(order);
 
-    //asocio cada ID con el producto
     const productsArray = await Promise.all(
       products.map(async (element: { id: any }) => {
         const product = await this.ormProductsRepository.findOneBy({
@@ -67,7 +63,6 @@ export class OrdersRepository {
           return `Producto con ID ${element.id} no encontrado`;
         }
 
-        //actualizo stock
         await this.ormProductsRepository.update(
           { id: element.id },
           { stock: product.stock - 1 },
@@ -76,20 +71,17 @@ export class OrdersRepository {
       }),
     );
 
-    //calculo el total
     const total = productsArray.reduce(
       (sum, product) => sum + Number(product.price),
       0,
     );
 
-    //creo OrderDetail y la inserto en la DB
     const orderDetail = new OrderDetails();
     orderDetail.price = Number(Number(total).toFixed(2));
     orderDetail.products = productsArray;
     orderDetail.order = newOrder;
     await this.ormOrderDetailRepository.save(orderDetail);
 
-    //envio al cliente la compra con la informacion de la orden, el detalle y los productos
     return this.ormOrdersRepository.find({
       where: { id: newOrder.id },
       relations: {

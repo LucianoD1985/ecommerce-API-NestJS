@@ -1,5 +1,3 @@
-import { Jwt } from './../node_modules/@types/jsonwebtoken/index.d';
-import { Type } from './../node_modules/typeorm/node_modules/path-scurry/dist/commonjs/index.d';
 import {
   MiddlewareConsumer,
   Module,
@@ -49,7 +47,6 @@ import { environment } from './config/environment';
   controllers: [AppController],
   providers: [AppService],
 })
-//export class AppModule {}
 export class AppModule implements NestModule, OnApplicationBootstrap {
   constructor(
     private readonly categoriesService: CategoriesService,
@@ -60,7 +57,7 @@ export class AppModule implements NestModule, OnApplicationBootstrap {
   }
   async onApplicationBootstrap() {
     await this.categoriesService.addCategories();
-    console.log('Categorias cargadas'); //console.table??
+    console.log('Categorias cargadas');
     await this.productsService.addProducts();
     console.log('Productos cargados');
   }

@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UploadApiResponse, v2 } from 'cloudinary';
-import toStream = require('buffer-to-stream');
-//import toStream from 'buffer-to-stream';
-//import * as toStream from 'buffer-to-stream';
+import toStream from 'buffer-to-stream';
 
 @Injectable()
 export class FileUploadRepository {
@@ -12,7 +10,11 @@ export class FileUploadRepository {
         { resource_type: 'auto' },
         (error, result) => {
           if (error || !result) {
-            reject(error || new Error('Error al cargar imagen en Cloudinary'));
+            reject(
+              new Error(
+                error?.message || 'Error al cargar imagen en Cloudinary',
+              ),
+            );
           } else {
             resolve(result);
           }

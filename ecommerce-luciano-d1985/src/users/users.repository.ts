@@ -18,26 +18,12 @@ export class UsersRepository {
   ): Promise<Omit<Users, 'password'>[]> {
     const skip = (page - 1) * limit;
     const allUsers = await this.ormUsersRepository.find({
-      skip: skip, //salta los registros anteriores
-      take: limit, //limita la cantidad de registros devueltos
+      skip: skip,
+      take: limit,
     });
     return allUsers.map(({ password, ...userNoPassword }) => userNoPassword);
   }
-  // async getUserById(id: string): Promise<Omit<Users, 'password'> | string> {
-  //   const foundUser = await this.ormUsersRepository.findOne({
-  //     where: { id },
-  //     relations: {
-  //       orders: {
-  //         orderDetails: {
-  //           products: true,
-  //         },
-  //       },
-  //     },
-  //   });
-  //   if (!foundUser) return `No se encontró usuario con id ${id}`;
-  //   const { password, ...userNoPassword } = foundUser;
-  //   return userNoPassword;
-  // }
+
   async getUserById(id: string): Promise<Omit<Users, 'password' | 'isAdmin'>> {
     const foundUser = await this.ormUsersRepository.findOne({
       where: { id },
@@ -55,16 +41,14 @@ export class UsersRepository {
     return filteredUser;
   }
 
-  // IMPORTANTE : retorna un usuario o null => invocado por Auth, no hay que cortar la ejecución
   async getUserByEmail(email: string): Promise<Users | null> {
     return await this.ormUsersRepository.findOneBy({ email: email });
   }
-  //return await this.ormUsersRepository.findOneBy({ email });
+
   async addUser(newUserData: CreateUserDto): Promise<string> {
     const savedUser = await this.ormUsersRepository.save(newUserData);
     return savedUser.id;
   }
-  //arriba ver tiene que devolver el usuario sin password, pero como lo uso en auth.service para guardar el id del token, lo dejo así por ahora
 
   async updateUser(
     id: string,

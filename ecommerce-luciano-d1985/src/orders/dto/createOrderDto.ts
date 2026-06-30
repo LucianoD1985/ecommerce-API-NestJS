@@ -15,5 +15,5 @@ export class CreateOrderDto {
   })
   @IsArray({ message: 'Los productos deben ser un arreglo' })
   @ArrayMinSize(1, { message: 'Debe haber al menos un producto en la orden' })
-  products!: Partial<Products[]>; //solo necesito el id del producto para crear la orden, no necesito toda la info del producto
+  products!: Partial<Products[]>;
 }

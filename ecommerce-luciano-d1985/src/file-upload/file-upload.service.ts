@@ -12,7 +12,6 @@ export class FileUploadService {
     private readonly productsRepository: Repository<Products>,
   ) {}
   async uploadImage(file: Express.Multer.File, productId: string) {
-    //verificar que exista
     const product = await this.productsRepository.findOneBy({
       id: productId,
     });
@@ -20,14 +19,13 @@ export class FileUploadService {
       throw new NotFoundException(
         `Producto con id: ${productId} no encontrado`,
       );
-    //cargar imagen
+
     const response = await this.fileUploadRepository.uploadImage(file);
 
-    //modificar URL
     await this.productsRepository.update(productId, {
       imageUrl: response.secure_url,
     });
-    //retornar el producto modificado
+
     const updatedProduct = await this.productsRepository.findOneBy({
       id: productId,
     });

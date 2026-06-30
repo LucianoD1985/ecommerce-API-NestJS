@@ -12,7 +12,7 @@ import { Products } from '../products/products.entity';
 })
 export class Categories {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column({
     type: 'varchar',
@@ -20,9 +20,9 @@ export class Categories {
     nullable: false,
     unique: true,
   })
-  name: string;
+  name!: string;
 
   @OneToMany(() => Products, (product) => product.category)
   @JoinColumn()
-  products: Products[];
+  products!: Products[];
 }

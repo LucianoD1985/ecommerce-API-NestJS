@@ -26,7 +26,3 @@ export class ProductsService {
     return this.productsRepository.deleteProduct(id);
   }
 }
-//function getProductById(id: any, string: any) {
-//throw new Error('Function not implemented.');
-//}
-//

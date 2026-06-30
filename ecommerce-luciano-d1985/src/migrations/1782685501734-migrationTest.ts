@@ -4,7 +4,6 @@ import * as bcrypt from 'bcrypt';
 
 export class MigrationTest1762219268970 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // Hasheamos la contraseña antes de insertarla:
     const passwordHash = await bcrypt.hash('aaBB33##', 10);
 
     await queryRunner.query(
