@@ -15,13 +15,13 @@ import { ApiProperty } from '@nestjs/swagger';
 })
 export class Orders {
   @ApiProperty({
-    description: 'Identificador único de la orden, generado automáticamente',
+    description: 'Identificador único de la orden, UUID',
   })
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
   @ApiProperty({
-    description: 'Fecha de creación de la orden, generada automáticamente',
+    description: 'Fecha de creación de la orden, DD/MM/YYYY',
   })
   @Column()
   date!: Date;

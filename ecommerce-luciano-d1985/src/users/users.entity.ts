@@ -6,14 +6,21 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Orders } from '..//orders/orders.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({
   name: 'USERS',
 })
 export class Users {
+  @ApiProperty({
+    description: 'Identificador único del usuario, UUID',
+  })
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
+  @ApiProperty({
+    description: 'Nombre de usuario',
+  })
   @Column({
     type: 'varchar',
     length: 50,
@@ -21,6 +28,9 @@ export class Users {
   })
   name!: string;
 
+  @ApiProperty({
+    description: 'Correo electrónico del usuario',
+  })
   @Column({
     type: 'varchar',
     length: 50,
@@ -29,6 +39,9 @@ export class Users {
   })
   email!: string;
 
+  @ApiProperty({
+    description: 'Contraseña del usuario',
+  })
   @Column({
     type: 'varchar',
     length: 60,
@@ -36,22 +49,34 @@ export class Users {
   })
   password!: string;
 
+  @ApiProperty({
+    description: 'Número de teléfono del usuario',
+  })
   @Column({
     type: 'int',
   })
   phone!: number;
 
+  @ApiProperty({
+    description: 'País del usuario',
+  })
   @Column({
     type: 'varchar',
     length: 50,
   })
   country!: string;
 
+  @ApiProperty({
+    description: 'Dirección del usuario',
+  })
   @Column({
     type: 'text',
   })
   address!: string;
 
+  @ApiProperty({
+    description: 'Ciudad del usuario',
+  })
   @Column({
     type: 'varchar',
     length: 50,
