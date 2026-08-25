@@ -31,7 +31,7 @@ export class ProductsController {
     return this.productsService.addProducts();
   }
 
-  @Get('id')
+  @Get(':id')
   getProductById(@Param('id') id: string) {
     return this.productsService.getProductById(id);
   }
