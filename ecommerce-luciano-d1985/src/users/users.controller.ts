@@ -55,6 +55,7 @@ export class UsersController {
   }
   @ApiBearerAuth()
   @Delete(':id')
+  @Roles('admin')
   @UseGuards(AuthGuard)
   @HttpCode(200)
   deleteUser(@Param('id', ParseUUIDPipe) id: string) {

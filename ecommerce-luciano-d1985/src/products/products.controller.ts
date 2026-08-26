@@ -13,6 +13,7 @@ import { Products } from '../products/products.entity';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { Roles } from '../decorators/roles.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 //import { IProduct } from './products.repository';
 
 @Controller('products')
@@ -36,6 +37,7 @@ export class ProductsController {
     return this.productsService.getProductById(id);
   }
 
+  @ApiBearerAuth()
   @Put(':id')
   @Roles('admin')
   @UseGuards(AuthGuard, RolesGuard)
@@ -44,6 +46,9 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @ApiBearerAuth()
+  @Roles('admin')
+  @UseGuards(AuthGuard, RolesGuard)
   deleteProduct(@Param('id') id: string) {
     return this.productsService.deleteProduct(id);
   }

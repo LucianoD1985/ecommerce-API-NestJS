@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Categories } from '../categories/categories.entity';
@@ -69,10 +74,16 @@ export class ProductsRepository {
     const updatedProduct = await this.ormProductsRepository.findOneBy({ id });
     return updatedProduct;
   }
-  async deleteProduct(id: string): Promise<string | null> {
+  async deleteProduct(id: string): Promise<string> {
     const product = await this.ormProductsRepository.findOneBy({ id });
-    if (!product) return null;
-    await this.ormProductsRepository.delete(id);
+    if (!product) throw new NotFoundException('Producto no encontrado');
+    try {
+      await this.ormProductsRepository.delete(id);
+    } catch (error) {
+      throw new ConflictException(
+        'No se puede eliminar el producto porque está siendo utilizado',
+      );
+    }
     return product.id;
   }
 }

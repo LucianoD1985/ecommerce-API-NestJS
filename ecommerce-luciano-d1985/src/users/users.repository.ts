@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Users } from '../users/users.entity';
@@ -67,7 +71,15 @@ export class UsersRepository {
     const foundUser = await this.ormUsersRepository.findOneBy({ id });
     if (!foundUser)
       throw new NotFoundException(`No existe usuario con id ${id}`);
-    await this.ormUsersRepository.remove(foundUser);
+
+    try {
+      await this.ormUsersRepository.remove(foundUser);
+    } catch (error) {
+      throw new ConflictException(
+        'No se puede eliminar el usuario porque tiene órdenes asociadas',
+      );
+    }
+
     return foundUser.id;
   }
 }
