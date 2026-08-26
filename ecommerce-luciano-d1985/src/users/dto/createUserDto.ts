@@ -180,20 +180,7 @@ export class UpdateUserDto {
   @IsEmpty()
   password?: string;
 }
-//export class UpdateUserDto {
-// @IsEmpty()
-// email!: string;
 
-// @IsOptional()
-//@IsNumber(
-// {
-//   allowNaN: false,
-//    allowInfinity: false,
-//  },
-//   { message: 'El teléfono debe ser un número' },
-// )
-//phone?: number;
-//}
 export class LogginUserDto extends PickType(CreateUserDto, [
   'email',
   'password',

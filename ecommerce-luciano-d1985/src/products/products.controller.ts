@@ -9,13 +9,11 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
-//import { Products } from '../products/products.entity';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { Roles } from '../decorators/roles.decorator';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { UpdateProductDto } from './updateProductDto';
-//import { IProduct } from './products.repository';
 
 @Controller('products')
 export class ProductsController {
@@ -57,4 +55,3 @@ export class ProductsController {
     return this.productsService.deleteProduct(id);
   }
 }
-//@Body() productNewData: Products

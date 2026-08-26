@@ -19,7 +19,6 @@ const config = {
   dropSchema: false, //*pasar a false en producción
 };
 
-//registramos objeto de configuración con el nombre "typeorm":
 export const typeOrmConfig = registerAs('typeorm', () => config);
 //
 export const connectionSource = new DataSource(config as DataSourceOptions);

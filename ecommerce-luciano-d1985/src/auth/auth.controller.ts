@@ -13,7 +13,6 @@ export class AuthController {
   }
 
   @Post('signin')
-  //@Post('signIn')
   signIn(@Body() credentials: LogginUserDto) {
     const { email, password } = credentials;
     return this.authService.signIn(email, password);

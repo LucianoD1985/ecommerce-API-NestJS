@@ -18,7 +18,6 @@ export class AuthService {
   getAuth() {
     return 'Autenticación';
   }
-  // REGISTRO
   async signUp(newUserData: CreateUserDto) {
     const { email, password } = newUserData;
     if (!email || !password) {
@@ -30,7 +29,6 @@ export class AuthService {
       throw new BadRequestException('El email ya está registrado');
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    //guardar en DB
     return await this.usersRepository.addUser({
       ...newUserData,
       password: hashedPassword,
@@ -41,19 +39,15 @@ export class AuthService {
     if (!email || !password) {
       throw new BadRequestException('Credenciales incorrectas');
     }
-    //verificar que el usuario exista
     const foundUser = await this.usersRepository.getUserByEmail(email);
     if (!foundUser) {
-      //throw new BadRequestException('asdasda');
       throw new ForbiddenException('Credenciales inválidas');
     }
     const validPassword = await bcrypt.compare(password, foundUser.password);
     if (!validPassword) {
-      //throw new BadRequestException('asdasda');
       throw new ForbiddenException('Credenciales inválidas');
     }
 
-    //firmo el token
     const payload = {
       id: foundUser.id,
       name: foundUser.name,
@@ -61,7 +55,6 @@ export class AuthService {
       roles: foundUser.isAdmin ? 'admin' : 'user',
     };
     const token = this.jwtService.sign(payload);
-    //enviar token al front
     return {
       message: 'Usuario logueado',
       token: token,

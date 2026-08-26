@@ -21,10 +21,4 @@ export class CreateOrderDto {
   @IsArray({ message: 'Los productos deben ser un arreglo' })
   @ArrayMinSize(1, { message: 'Debe haber al menos un producto en la orden' })
   products!: Partial<Products>[];
-  //@ApiProperty({
-  //description: 'Debe ser un arreglo de productos y no puede estar vacío',
-  //})
-  //@IsArray({ message: 'Los productos deben ser un arreglo' })
-  //@ArrayMinSize(1, { message: 'Debe haber al menos un producto en la orden' })
-  //products!: Partial<Products>[];
 }

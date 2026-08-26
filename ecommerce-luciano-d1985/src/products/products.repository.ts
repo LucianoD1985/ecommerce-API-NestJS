@@ -75,14 +75,7 @@ export class ProductsRepository {
     const updatedProduct = await this.ormProductsRepository.findOneBy({ id });
     return updatedProduct;
   }
-  //async updateProduct(
-  // id: string,
-  // prodectNewData: Products,
-  //): Promise<Products | null> {
-  //  await this.ormProductsRepository.update(id, prodectNewData);
-  //  const updatedProduct = await this.ormProductsRepository.findOneBy({ id });
-  //  return updatedProduct;
-  //}
+
   async deleteProduct(id: string): Promise<string> {
     const product = await this.ormProductsRepository.findOneBy({ id });
     if (!product) throw new NotFoundException('Producto no encontrado');

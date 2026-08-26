@@ -57,13 +57,6 @@ export class UsersController {
     return this.usersService.updateUser(id, userNewData);
   }
 
-  //@ApiBearerAuth()
-  //@Put(':id')
-  //@UseGuards(AuthGuard)
-  //@HttpCode(200)
-  //updateUser(@Param('id', ParseUUIDPipe) id: string, @Body() userNewData: any) {
-  // return this.usersService.updateUser(id, userNewData);
-  //}
   @ApiBearerAuth()
   @Delete(':id')
   @Roles('admin')
