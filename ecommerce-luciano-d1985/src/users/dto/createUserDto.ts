@@ -112,19 +112,88 @@ export class CreateUserDto {
 }
 
 export class UpdateUserDto {
-  @IsEmpty()
-  email!: string;
+  @ApiProperty({
+    description: 'Nombre de usuario',
+    example: 'Test User 01',
+    required: false,
+  })
+  @IsOptional()
+  @IsString({ message: 'El nombre debe ser una cadena de texto' })
+  @MinLength(3, { message: 'El nombre debe tener al menos 3 caracteres' })
+  @MaxLength(80, { message: 'El nombre no debe exceder los 80 caracteres' })
+  name?: string;
 
+  @ApiProperty({
+    description: 'Debe ser un número',
+    example: 1234567890,
+    required: false,
+  })
   @IsOptional()
   @IsNumber(
-    {
-      allowNaN: false,
-      allowInfinity: false,
-    },
+    { allowNaN: false, allowInfinity: false },
     { message: 'El teléfono debe ser un número' },
   )
   phone?: number;
+
+  @ApiProperty({
+    description: 'País del usuario',
+    example: 'Argentina',
+    required: false,
+  })
+  @IsOptional()
+  @IsString({ message: 'El país debe ser una cadena de texto' })
+  @MinLength(5, { message: 'El país debe tener al menos 5 caracteres' })
+  @MaxLength(20, { message: 'El país no debe exceder los 20 caracteres' })
+  country?: string;
+
+  @ApiProperty({
+    description: 'Dirección del usuario',
+    example: 'example street 123',
+    required: false,
+  })
+  @IsOptional()
+  @IsString({ message: 'La dirección debe ser una cadena de texto' })
+  @MinLength(3, { message: 'La dirección debe tener al menos 3 caracteres' })
+  @MaxLength(80, { message: 'La dirección no debe exceder los 80 caracteres' })
+  address?: string;
+
+  @ApiProperty({
+    description: 'Ciudad del usuario',
+    example: 'Buenos Aires',
+    required: false,
+  })
+  @IsOptional()
+  @IsString({ message: 'La ciudad debe ser una cadena de texto' })
+  @MinLength(5, { message: 'La ciudad debe tener al menos 5 caracteres' })
+  @MaxLength(20, { message: 'La ciudad no debe exceder los 20 caracteres' })
+  city?: string;
+
+  @ApiHideProperty()
+  @IsEmpty()
+  isAdmin?: boolean;
+
+  @ApiHideProperty()
+  @IsEmpty()
+  email?: string;
+
+  @ApiHideProperty()
+  @IsEmpty()
+  password?: string;
 }
+//export class UpdateUserDto {
+// @IsEmpty()
+// email!: string;
+
+// @IsOptional()
+//@IsNumber(
+// {
+//   allowNaN: false,
+//    allowInfinity: false,
+//  },
+//   { message: 'El teléfono debe ser un número' },
+// )
+//phone?: number;
+//}
 export class LogginUserDto extends PickType(CreateUserDto, [
   'email',
   'password',

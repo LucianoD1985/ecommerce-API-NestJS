@@ -9,6 +9,7 @@ import { Repository } from 'typeorm';
 import { Categories } from '../categories/categories.entity';
 import { Products } from './products.entity';
 import { allProducts } from '../utils/data';
+import { UpdateProductDto } from './updateProductDto';
 
 @Injectable()
 export class ProductsRepository {
@@ -68,12 +69,20 @@ export class ProductsRepository {
 
   async updateProduct(
     id: string,
-    prodectNewData: Products,
+    productNewData: UpdateProductDto,
   ): Promise<Products | null> {
-    await this.ormProductsRepository.update(id, prodectNewData);
+    await this.ormProductsRepository.update(id, productNewData);
     const updatedProduct = await this.ormProductsRepository.findOneBy({ id });
     return updatedProduct;
   }
+  //async updateProduct(
+  // id: string,
+  // prodectNewData: Products,
+  //): Promise<Products | null> {
+  //  await this.ormProductsRepository.update(id, prodectNewData);
+  //  const updatedProduct = await this.ormProductsRepository.findOneBy({ id });
+  //  return updatedProduct;
+  //}
   async deleteProduct(id: string): Promise<string> {
     const product = await this.ormProductsRepository.findOneBy({ id });
     if (!product) throw new NotFoundException('Producto no encontrado');
